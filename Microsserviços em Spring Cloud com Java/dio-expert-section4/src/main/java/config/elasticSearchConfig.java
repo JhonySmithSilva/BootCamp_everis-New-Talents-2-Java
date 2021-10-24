@@ -26,16 +26,17 @@ public class elasticSearchConfig extends AbstractElasticsearchConfiguration{
     @Override
     public RestHighLevelClient elasticsearchClient() {
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo("localhost:9200", "localhost:9300")
-                .build();
+        .connectedTo("localhost:9200", "localhost:9300")
+        .build();
         return RestClients.create(clientConfiguration).rest();
     }
 
     @Bean
     @Override
     public EntityMapper entityMapper() {
-        ElasticsearchEntityMapper entityMapper = new ElasticsearchEntityMapper(elasticsearchMappingContext(),
-            new DefaultConversionService());
+        ElasticsearchEntityMapper entityMapper = new ElasticsearchEntityMapper(
+            elasticsearchMappingContext(),new DefaultConversionService()
+        );
         entityMapper.setConversions(elasticsearchCustomConversions());
         return entityMapper;
     }    
